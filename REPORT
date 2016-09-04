@@ -1,0 +1,271 @@
+﻿CAMLE - Language Engineering - Andreas Georgiou - ag14774
+
+All language features have been succesfully implemented.
+
+The compiler can be compiled using the default Makefile and the antlr3 script provided with the skeleton compiler:
+make all : compiles the compiler
+make clean: deletes text files, .ass, .class, .tokens, Lex.java, Syn.java
+
+Usage:
+-lex   Lexical analyzer
+-syn   Syntax analyzer
+-irt   Intermediate Tree phase
+-cg    Code generation without register reallocation and optimizations
+       (Does not generate .ass file)
+-cg-O1 Code generation with simple dead code removal. Removes unused labels and dead code caused by jumps
+       (Does not generate .ass file)
+-cg-O2 Full optimization(Does not generate .ass file)
+
+To compile: antlr3 camle <filename.w> (Full optimization is enabled by default)
+
+------------------------------------------------------------------------------
+./assmule test1.ass:
+ASS/MULE - ASSembler/eMUlator for Language Engineering - v2.7 - Steve Gregory
+---test1.ass ASSEMBLY BEGINS
+---test1.ass ASSEMBLY ENDS
+---test1.ass EXECUTION BEGINS
+10023
+10023
+76
+76
+---test1.ass EXECUTION ENDS
+STATISTICS:
+  22 instructions generated
+  2 registers used
+  22 instructions executed
+------------------------------------------------------------------------------
+./assmule test2.ass:
+ASS/MULE - ASSembler/eMUlator for Language Engineering - v2.7 - Steve Gregory
+---test2.ass ASSEMBLY BEGINS
+---test2.ass ASSEMBLY ENDS
+---test2.ass EXECUTION BEGINS
+7
+-5
+28
+-91
+70
+---test2.ass EXECUTION ENDS
+STATISTICS:
+  17 instructions generated
+  2 registers used
+  17 instructions executed
+------------------------------------------------------------------------------
+./assmule test3.ass
+ASS/MULE - ASSembler/eMUlator for Language Engineering - v2.7 - Steve Gregory
+---test3.ass ASSEMBLY BEGINS
+---test3.ass ASSEMBLY ENDS
+---test3.ass EXECUTION BEGINS
+Enter a number: 5
+Enter a number: 6
+First is 5; second is 6
+---test3.ass EXECUTION ENDS
+STATISTICS:
+  33 instructions generated
+  2 registers used
+  33 instructions executed
+------------------------------------------------------------------------------
+./assmule test4.ass
+ASS/MULE - ASSembler/eMUlator for Language Engineering - v2.7 - Steve Gregory
+---test4.ass ASSEMBLY BEGINS
+---test4.ass ASSEMBLY ENDS
+---test4.ass EXECUTION BEGINS
+13
+5
+
+78bce
+---test4.ass EXECUTION ENDS
+STATISTICS:
+  18 instructions generated
+  2 registers used
+  18 instructions executed
+------------------------------------------------------------------------------
+./assmule test5.ass
+ASS/MULE - ASSembler/eMUlator for Language Engineering - v2.7 - Steve Gregory
+---test5.ass ASSEMBLY BEGINS
+---test5.ass ASSEMBLY ENDS
+---test5.ass EXECUTION BEGINS
+1
+WARNING: Disabled backward jump in    3: JMP 1  
+3
+WARNING: Disabled backward jump in    6: JMP 4  
+7
+WARNING: Disabled backward jump in    9: JMP 7  
+b
+WARNING: Disabled backward jump in   11: JMP 10  
+c
+WARNING: Disabled backward jump in   13: JMP 12  
+d
+WARNING: Disabled backward jump in   15: JMP 14  
+---test5.ass EXECUTION ENDS
+STATISTICS:
+  17 instructions generated
+  2 registers used
+  17 instructions executed
+------------------------------------------------------------------------------
+./assmule test6.ass
+ASS/MULE - ASSembler/eMUlator for Language Engineering - v2.7 - Steve Gregory
+---test6.ass ASSEMBLY BEGINS
+---test6.ass ASSEMBLY ENDS
+---test6.ass EXECUTION BEGINS
+truefalsefalsetruetruefalsefalsefalsetruefalsefalsefalsefalse
+---test6.ass EXECUTION ENDS
+STATISTICS:
+  14 instructions generated
+  0 registers used
+  14 instructions executed
+------------------------------------------------------------------------------
+./assmule test7.ass
+ASS/MULE - ASSembler/eMUlator for Language Engineering - v2.7 - Steve Gregory
+---test7.ass ASSEMBLY BEGINS
+---test7.ass ASSEMBLY ENDS
+---test7.ass EXECUTION BEGINS
+Factorial calculator
+Enter number: 5
+Factorial of 5 is 120
+
+Exponential calculator
+Enter base: 2
+Enter exponent: 3
+2 raised to the power of 3 is 8
+---test7.ass EXECUTION ENDS
+STATISTICS:
+  100 instructions generated
+  3 registers used
+  155 instructions executed
+------------------------------------------------------------------------------
+./assmule test7Custom.ass
+ASS/MULE - ASSembler/eMUlator for Language Engineering - v2.7 - Steve Gregory
+---test7Custom.ass ASSEMBLY BEGINS
+---test7Custom.ass ASSEMBLY ENDS
+---test7Custom.ass EXECUTION BEGINS
+Factorial calculator
+Enter number: 5
+Factorial of 5 is 120
+
+Exponential calculator
+Enter base: 2
+Enter exponent: 3
+2 raised to the power of 3 is 8
+---../camleSubmission/test7Custom.ass EXECUTION ENDS
+STATISTICS:
+  82 instructions generated
+  4 registers used
+  107 instructions executed
+------------------------------------------------------------------------------
+./assmule test7NOWORDPOOL.ass (WORD POOL FEATURE DISABLED!!!)
+ASS/MULE - ASSembler/eMUlator for Language Engineering - v2.7 - Steve Gregory
+---test7NOWORDPOOL.ass ASSEMBLY BEGINS
+---test7NOWORDPOOL.ass ASSEMBLY ENDS
+---test7NOWORDPOOL.ass EXECUTION BEGINS
+Factorial calculator
+Enter number: 5
+Factorial of 5 is 120
+
+Exponential calculator
+Enter base: 2
+Enter exponent: 3
+2 raised to the power of 3 is 8
+---test7NOWORDPOOL.ass EXECUTION ENDS
+STATISTICS:
+  67 instructions generated
+  3 registers used
+  125 instructions executed
+------------------------------------------------------------------------------
+./assmule test7CustomNOWORDPOOL.ass (WORD POOL FEATURE DISABLED!!!)
+ASS/MULE - ASSembler/eMUlator for Language Engineering - v2.7 - Steve Gregory
+---test7CustomNOWORDPOOL.ass ASSEMBLY BEGINS
+---test7CustomNOWORDPOOL.ass ASSEMBLY ENDS
+---test7CustomNOWORDPOOL.ass EXECUTION BEGINS
+Factorial calculator
+Enter number: 5
+Factorial of 5 is 120
+
+Exponential calculator
+Enter base: 2
+Enter exponent: 3
+2 raised to the power of 3 is 8
+---test7CustomNOWORDPOOL.ass EXECUTION ENDS
+STATISTICS:
+  49 instructions generated
+  4 registers used
+  77 instructions executed
+------------------------------------------------------------------------------
+./assmule testNewFeatures.ass
+ASS/MULE - ASSembler/eMUlator for Language Engineering - v2.7 - Steve Gregory
+---testNewFeatures.ass ASSEMBLY BEGINS
+---testNewFeatures.ass ASSEMBLY ENDS
+---testNewFeatures.ass EXECUTION BEGINS
+1
+2
+3
+4
+true
+---testNewFeatures.ass EXECUTION ENDS
+STATISTICS:
+  33 instructions generated
+  3 registers used
+  128 instructions executed
+------------------------------------------------------------------------------
+./assmule bullseye.ass
+ASS/MULE - ASSembler/eMUlator for Language Engineering - v2.7 - Steve Gregory
+---bullseye.ass ASSEMBLY BEGINS
+---bullseye.ass ASSEMBLY ENDS
+---bullseye.ass EXECUTION BEGINS
+Recommended parameters: size=28, rings=10
+Size: 28
+Number of rings: 10
+{circle goes here}
+---bullseye.ass EXECUTION ENDS
+STATISTICS:
+  95 instructions generated
+  4 registers used
+  900125 instructions executed
+------------------------------------------------------------------------------
+./assmule bullseyeImproved.ass
+ASS/MULE - ASSembler/eMUlator for Language Engineering - v2.7 - Steve Gregory
+---bullseyeImproved.ass ASSEMBLY BEGINS
+---bullseyeImproved.ass ASSEMBLY ENDS
+---bullseyeImproved.ass EXECUTION BEGINS
+Recommended parameters: size=28, rings=10
+Size: 28
+Number of rings: 10
+{circle goes here}
+---bullseyeImproved.ass EXECUTION ENDS
+STATISTICS:
+  78 instructions generated
+  7 registers used
+  767372 instructions executed
+------------------------------------------------------------------------------
+NOTE: High number of instructions are caused by a feature that allocates each word in a string separately. This saves memory because words do not get reallocated twice, but has the disadvantage that a simple write('hello world') is translated to 3 write instructions. This can be disabled in Irt.java by setting NO_WORD_POOL = true
+
+Extras:
+
+ERROR CHECKING:
+-More user friendly error messages. eg instead of saying "missing ID", it will output "missing ID in expression" (As demonstrated in the ANTLR book page 249-250). This is done by pushing paraphrases to
+a stack as the syntax analyzer parses the input.
+-Undeclared or mispelled variables/arrays. When an undeclared variable is detected, a dynamic programming algorithm is used to calculate the edit distance between the mispelled variable and all declared variables and make suggestions. e.g "Undeclared identifier andeas. Perhaps you meant andreas?"
+-When a variable is declared as "register"(explained below) and then redeclared, or when a variable is declared as a normal variable but then redeclared as a register variable, an error message is outputted: "Identifier i is already declared in statement"
+-For loops require either undeclared variables(which are then declared as register variabled automatically) or already declared register variabled. If non-register variable is used then an error message is outputted: " Identifier i is already declared as a non-register variable in statement"
+-Missing semicolon. The language looks for the EOF instead of compiling only upto the statement with no semicolon. Missing semicolon will cause the error: "missing ";" between statements"
+RELATED TEST FILES: testErrors.w, testMissingSemicolon.w
+-Variables longer than 8 characters are detected during Lexical analysis.
+
+EXTRA LANGUAGE FEATURES:
+-Arrays: An array is defined using "def name[size]" e.g. def A[5]. For each array access, bounds checking code is also generated. e.g. trying to access A[5]:=0 or A[-1]:=0 will cause an error and halt.
+-Variables can be marked as "register" when they are FIRST declared. This will cause the compiler to not allocate memory for those variables but instead allocate and keep them in a register.(Those are marked as TEMP in the IRT). This is useful for variables that are heavily used like counters e.g "register i := 0"(Similar to "register" in C)
+-For loops: e.g. "for j:=1 to 4 do ..." This will automatically allocate a register variable j if j is not already allocated as a register variable.
+-OR operator: write(true | false)
+RELATED TEST FILES: testNewFeatures.w, testArrayBounds.w, test8Custom.w, test7Custom.w(This is test7 with heavily used variabled declared as "register" to showcase the reduction in instructions), bullseyeImproved.w(This also demonstrates the improvement when heavily used variables are declared as "register")
+
+OPTIMIZATIONS:
+-All variables are allocated in the beginning of memory and all strings at the end. This eliminates the need of adding padding and wasting memory.
+-Strings are broken down into words and then allocated. This saves memory because words do not get reallocated twice, but has the disadvantage that a simple write('hello world') is translated to 3 write instructions. This can be disabled in Irt.java by setting NO_WORD_POOL = true. (testWordAllocation.w)
+-Trivial expressions or boolean expressions are evaluated at compile time. e.g write(1+5+7) will cause the compiler to add the numbers at compile time instead of generating instructions for adding them. The compiler tries to evaluate as much as possible at compile time. This feature helps to select bigger tiles in IRT to generate code for. e.g "if 1<=base then" will cause a SUBI instruction to be generated instead of an ADDI to move 1 to a register followed by a SUB. Same for instructions like "count:=count-1". This is going to be translated to a single instruction (all of the tests demonstrate this, especially test7Custom.w and bullseyeImproved.w)
+-CJUMPS are efficiently generated and code is generated based on whether the CJUMP is followed by one of its labels(as shown in the lecture slide 186-187).
+-Liveness analysis and graph colouring used to reduce registers. If colouring fails, then it retries with one more colour until it completes succesfully. The colours required are usually predicted correctly during liveness analysis.
+-Unused labels and dead code due to JMPs are removed.
+-Simple unnecessary moves are removed if any. e.g Moves from one register to itself. Those are sometimes caused in the process of reallocating registers, or when removing dead code
+-More dead code is removed by checking if defined registers are in the OUT set of that instruction(as shown in slide 249)
+
+
+TIME SPENT ON EXTRAS: About 20 hours, including the time spent studying the ANTLR book and other material
