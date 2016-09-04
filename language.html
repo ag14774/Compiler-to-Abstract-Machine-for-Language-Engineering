@@ -1,0 +1,303 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-gb" xml:lang="en-gb">
+   <head>
+    <title>Bristol University | Department of Computer Science</title>
+    <base target="_top" />
+    
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta content="University of Bristol" name="DCTERMS.creator" />
+    <meta content="en-GB" name="DCTERMS.language" />
+    <meta content="2013-09-09" name="DCTERMS.modified" />
+    <meta content="2013-07-15" name="DCTERMS.created" />
+    <meta content="text/html" name="DCTERMS.format" />
+    <meta content="University of Bristol" name="DCTERMS.publisher" />
+    <meta content="http://www.bristol.ac.uk/university/web/terms-conditions.html" name="DCTERMS.rights" />
+    
+    <link rel="icon" href="http://www.bristol.ac.uk/favicon.gif" type="image/gif" />
+    
+    <script src = "//code.jquery.com/jquery-2.1.3.min.js"></script>
+ 
+    <meta name="viewport" content="width=1200" /> <!-- Will need to tweak this accordingly for mobile devices -->
+    <link rel="stylesheet" type="text/css" href="/styles/uob_2015/style.css" />
+
+<!--nomodify-->
+
+<title>COMS22201 Language Engineering Programming Language Definition</title>
+<style TYPE="text/css">
+  BODY{font-size: 15px;}
+  TR{font-size: 15px;}
+  TD{font-size: 15px;}
+  PRE{font-size: 13px; font-family: monospace;}
+  CODE{font-size: 13px; font-family: monospace;}
+  .PRO{font-size: 13px; font-family: monospace;}
+</style></head>
+<body id='age'>
+
+<div id="uobcms-wrapper" class="width-master"> 
+
+
+<h1>COMS22201 Language Engineering<br>
+Programming Language Definition</h1>
+
+<p>The programming language is based on the <b>While</b> language described in the <a href="nielson.pdf">Nielson book</a>.</p>
+
+<ol>
+<li><b>General</b><p>
+
+Upper-case and lower-case letters are distinct.<p>
+
+All the normal characters that are available on an English keyboard are allowed 
+within strings or comments in the programs with the following provisos:<p>
+
+<ol>
+
+<li>White space (space, tab, and newline characters) or comments can occur 
+anywhere within the program except inside identifiers, reserved words, 
+constants, or strings (space characters in strings are of course allowed but
+have no special significance).  Comments are enclosed in <code>{ }</code>.  The 
+character <code>}</code> is not allowed within a comment, and comments may 
+not be nested.<p>
+</ol>
+
+<li><b>Reserved words</b><p>
+
+The following are reserved words (all lower-case) in the language and cannot be used as
+identifiers:<p>
+
+  <pre>do  else  false  if  read  skip  then  true  while  write  writeln</pre>
+
+<li><b>Identifiers</b><p>
+
+These can be any length from 1 to 8 characters, the first of which must be 
+alphabetic, and the remainder either alphabetic or numeric. Upper-case and lower-case
+letters are allowed.<p>
+
+<li><b>Constants</b><p>
+
+Constants are integer numbers.  An integer constant is any sequence of decimal digits.<p>
+
+<li><b>Strings</b><p>
+
+A string of text is enclosed in 'single quotes'; a single quote within the string is 
+represented by two consecutive single quotes. Strings are allowed only in <code>write</code> 
+statements.<p>
+
+<li><b>The grammar and semantics of the language</b>
+
+<table>
+<tr>
+<td width='40%'>
+<pre>&lt;program&gt; ::= 
+     &lt;statements&gt;</pre>
+</td>
+<td width='60%'>&nbsp;
+</td>
+</tr>
+
+<tr>
+<td>
+<pre>&lt;statements&gt; ::= 
+     &lt;statement&gt; ( ';' &lt;statement&gt; ) *</pre>
+</td>
+<td><small>A sequence of simple statements separated by semicolons.</small>
+</td>
+</tr>
+
+<tr>
+<td>
+<pre>&lt;statement&gt; ::= 
+     &lt;variable&gt; ':=' &lt;exp&gt;</pre>
+</td>
+
+<td>
+<small>This assigns the value of an arithmetic expression to a variable.</small>
+</td>
+</tr>
+
+
+<tr>
+<td>
+<pre>   | 'skip'</pre>
+</td>
+
+<td>
+<small>Do nothing.</small>
+</td>
+</tr>
+
+<tr>
+<td>
+<pre>   | 'if' &lt;boolexp&gt;
+     'then' &lt;statement&gt;
+     'else' &lt;statement&gt;</pre>
+</td>
+
+<td>
+<small>This executes the first statement if the boolean expression is <code>true</code>, or the 
+second statement if the boolean expression is <code>false</code>.</small>
+</td>
+</tr>
+
+<tr>
+<td>
+<pre>   | 'while' &lt;boolexp&gt; 
+     'do' &lt;statement&gt;</pre>
+</td>
+
+<td>
+<small>This construct executes the statement repetitively, zero or more times, until the boolean 
+expression becomes <code>false</code>.</small>
+</td>
+</tr>
+
+<tr>
+<td>
+<pre>   | 'read' '(' &lt;variable&gt; ')'</pre>
+</td>
+
+<td>
+<small>This inputs a value and assigns it to the variable specified.</small>
+</td>
+</tr>
+
+<tr>
+<td>
+<pre>   | 'write' '(' &lt;exp&gt; ')'</pre>
+</td>
+
+<td>
+<small>This outputs the value of the arithmetic expression in some appropriate format.</small>
+</td>
+</tr>
+
+<tr>
+<td>
+<pre>   | 'write' '(' &lt;boolexp&gt; ')'</pre>
+</td>
+
+<td>
+<small>This outputs the value of the boolean expression.</small>
+</td>
+</tr>
+
+<tr>
+<td>
+<pre>   | 'write' '(' &lt;string&gt; ')'</pre>
+</td>
+
+<td>
+<small>This outputs the string.</small>
+</td>
+</tr>
+
+<tr>
+<td>
+<pre>   | 'writeln'</pre>
+</td>
+
+<td>
+<small>Outputs a newline.</small>
+</td>
+</tr>
+
+<tr>
+<td>
+<pre>   | '(' &lt;statements&gt; ')'</pre>
+</td>
+
+<td>
+<small>Makes a sequence of statements a single statement.</small>
+</td>
+</tr>
+
+<tr>
+<td>
+<pre>
+&lt;boolexp&gt; ::= 
+     &lt;boolterm&gt; ( '&' &lt;boolterm&gt ) * ;
+</pre>
+</td>
+
+<td><small>A boolean expression uses only AND and NOT operators.</small>
+</td>
+</tr>
+<tr>
+<td>
+<pre>
+&lt;boolterm&gt; ::= 
+     '!' &lt;boolean&gt;
+   | &lt;boolean&gt;
+</pre>
+</td>
+
+<td>
+</td>
+</tr>
+
+<tr>
+<td>
+<pre>
+&lt;boolean&gt; ::= 
+     'true'
+   | 'false'
+   | &lt;exp&gt; '=' &lt;exp&gt;
+   | &lt;exp&gt; '&lt;=' &lt;exp&gt;
+   | '(' &lt;boolexp&gt; ')'
+</pre>
+</td>
+
+<td><small><code>=</code> and <code>&le;</code> are the only arithmetic relations allowed.</small>
+</td>
+</tr>
+
+<tr>
+<td>
+<pre>
+&lt;exp&gt; ::= 
+     &lt;term&gt; ( ( '+' | '-' ) &lt;term&gt; )*
+</pre>
+</td>
+
+<td><small>Arithmetic expressions use <code>+</code>, <code>-</code>, and <code>*</code> operators.</small>
+</td>
+</tr>
+
+<TR>
+<TD>
+<PRE>
+&lt;term&gt; ::= 
+     &lt;factor&gt; ( '*' &lt;factor&gt; )*
+</PRE>
+</TD>
+
+<TD>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<PRE>
+&lt;factor&gt; ::= 
+     &lt;variable&gt;
+   | &lt;constant&gt;
+   | '(' &lt;exp&gt; ')'
+</PRE>
+</TD>
+
+<TD>
+<SMALL>All constants are treated as unsigned (i.e., positive).  Negative constants are not allowed.</SMALL>
+</TD>
+</TR>
+
+</TABLE>
+</OL>
+
+</div>
+
+
+</div>
+</body>
+
+
+</html>
